@@ -1,0 +1,5 @@
+#!/bin/bash
+make
+./heat_demo 40
+./original
+./result

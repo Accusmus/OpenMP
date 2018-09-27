@@ -16,8 +16,8 @@ CFLAGS = -w -O3
 OBJS = fitsfile.o
 
 # Link to CFITSIO libraries - modify these paths accordingly
-LIBP = -L/home/matthew/Documents/cfitsio
-INCP = -I/home/matthew/Documents/cfitsio
+LIBP = -L/home/s14303742/Documents/cfitsio
+INCP = -I/home/s14303742/Documents/cfitsio
 
 
 LIBS = -lcfitsio -lm -fopenmp

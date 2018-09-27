@@ -1,3 +1,5 @@
 #!/bin/bash
 make
 ./heat_demo 100
+./original
+./result
