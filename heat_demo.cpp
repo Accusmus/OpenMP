@@ -10,7 +10,7 @@ Start up demo program for 159735 Assignment 3 Semester 1 2013
 
 using namespace std;
 
-#define NUM_THREADS 6
+#define NUM_THREADS 4
 
 int main(int argc, char* argv[]) 
 {
@@ -44,29 +44,31 @@ int main(int argc, char* argv[])
 		//calculate the start and end point Thread
 		int startpoint = omp_get_thread_num() * sizePerThread;
 		int endpoint; 
+
+		//End point should account for if the numbers dont divide well between the number of threads
 		if(omp_get_thread_num() == NUM_THREADS-1){
 			endpoint = startpoint + sizePerThread + leftOver; 
 		}else{
 			endpoint = startpoint + sizePerThread; 
 		}
 
+
+		//print for me for each thread
+		#pragma omp critical
 		cout << "Thread Num: " << omp_get_thread_num() << " start point: " << startpoint << " end point " << endpoint << endl;
 
+		//start the do loop
 		do {
 			
 			for (int y = startpoint; y < endpoint; ++y) {
 				if(y == 0) continue; 
 				if(y == npix - 1) continue;
 				for (int x = 1; x < npixx-1; ++x) {
-					//if((y == startpoint) || (y == endpoint-1)){ 
 					g(y, x) = 0.25 * (h(y, x-1) + h(y, x+1) + h(y-1, x) + h(y+1,x));
-					//}else{
-						//g(y, x) = 0.25 * (h(y, x-1) + h(y, x+1) + h(y-1, x) + h(y+1,x));
-					//}
 			  	}
 			}
 		
-			//#pragma omp barrier
+			#pragma omp barrier
 			fix_boundaries2(g);
 			nconverged = 0;
 		

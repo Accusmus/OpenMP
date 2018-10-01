@@ -1,3 +1,4 @@
 #!/bin/bash
 make
-./heat_demo 316
+./heat_demo 300
+./result
